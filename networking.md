@@ -1,5 +1,5 @@
-===============================
 CLOUD & NETWORKING INTERVIEW Q&A
+===============================
 
 1. **VPC / VNet**
 - AWS: VPC → isolated private network
@@ -168,4 +168,5 @@ Q10: How do Security Groups / NSG work?
 ===============================
 End of Networking Q&A Cheat Sheet
 ===============================
+
 
