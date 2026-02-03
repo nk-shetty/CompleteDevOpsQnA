@@ -2,10 +2,10 @@ CLOUD & NETWORKING INTERVIEW Q&A
 ===============================
 
 1. **VPC / VNet**
-- AWS: VPC → isolated private network
-- Azure: VNet → isolated private network
-- Purpose: host resources, define subnets, route tables, gateways
-
+* AWS: VPC → isolated private network
+* Azure: VNet → isolated private network
+* Purpose: host resources, define subnets, route tables, gateways
+---
 2. **Subnets**
 - Divide VPC/VNet into smaller segments
 - Public: Accessible from internet
@@ -165,8 +165,10 @@ Q10: How do Security Groups / NSG work?
 - They are stateful → return traffic automatically allowed  
 - Control inbound/outbound rules per VM/subnet
 
+
+End of Networking Q&A 
 ===============================
-End of Networking Q&A Cheat Sheet
+
 
 
 
