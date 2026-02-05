@@ -1,0 +1,194 @@
+############################################################
+# SAMPLE GITHUB ACTIONS PIPELINE (CI/CD) FOR PROFESSIONAL USE
+# FILE: github_actions_pipeline.yml
+# DESCRIPTION: Complete GitHub Actions workflow with build, test, deploy stages,
+# notifications, caching, and secrets usage for a professional DevOps pipeline.
+############################################################
+
+# 1. Name of the workflow
+name: Professional CI/CD Pipeline
+
+# 2. Triggers for the workflow
+on:
+  push:
+    branches:
+      - main           # Trigger workflow on push to main branch
+  pull_request:
+    branches:
+      - main           # Trigger workflow for PRs targeting main
+  schedule:
+    - cron: "0 2 * * *" # Nightly run at 2:00 AM UTC
+
+# 3. Environment variables
+env:
+  DOTNET_VERSION: '8.0'   # Example for .NET build
+  DEPLOY_ENV: 'staging'
+
+# 4. Jobs
+jobs:
+  # JOB 1: Build and Test
+  build:
+    runs-on: ubuntu-latest
+
+    # Optional: caching dependencies to speed up builds
+    strategy:
+      matrix:
+        dotnet-version: [8.0]
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup .NET
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build the application
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # Run tests
+      - name: Run Tests
+        run: dotnet test --no-build --verbosity normal
+
+      # Upload test results as artifact
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/TestResults/*.xml'
+
+  # JOB 2: Deploy
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Runs only after successful build
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Example: Use secret for deployment
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to $DEPLOY_ENV environment..."
+          # Example command using a secret token
+          echo ${{ secrets.DEPLOY_TOKEN }} | ./deploy.sh
+
+  # JOB 3: Notify (optional)
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    steps:
+      - name: Notify Slack (example)
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          channel-id: 'C1234567890'
+          slack-message: "Build and deployment completed successfully!"
+          slack-token: ${{ secrets.SLACK_TOKEN }}
+
+############################################################
+# Q&A SECTION – GITHUB ACTIONS
+############################################################
+
+# Q1. What is GitHub Actions?
+# A1. GitHub Actions is a CI/CD and automation platform integrated into GitHub. 
+#     It allows developers to automate build, test, and deployment workflows
+#     triggered by GitHub events such as push, pull_request, or scheduled cron jobs.
+
+# Q2. What are the main components of a GitHub Actions workflow?
+# A2. Main components include:
+#     1. Workflow: Defined in a YAML file (e.g., .github/workflows/ci.yml)
+#     2. Trigger (on): Defines events that start the workflow
+#     3. Jobs: A workflow can have multiple jobs running sequentially or in parallel
+#     4. Steps: Individual tasks inside a job (like build, test, deploy)
+#     5. Actions: Prebuilt reusable steps, like checkout or setup-dotnet
+#     6. Runners: Machines (Linux, Windows, Mac) that execute jobs
+#     7. Secrets and environment variables: For secure storage of tokens, passwords
+
+# Q3. How does GitHub Actions handle dependencies and caching?
+# A3. Using caching actions (e.g., actions/cache), workflows can store and restore
+#     dependencies like npm modules, .NET packages, Maven or Docker layers, 
+#     which speeds up repeated builds.
+
+# Q4. What is the difference between jobs and steps?
+# A4. - Jobs run on separate runners and can run in parallel (unless 'needs' specifies order)
+#     - Steps are sequential tasks inside a job sharing the same runner environment
+
+# Q5. How do you secure secrets in GitHub Actions?
+# A5. Secrets (like API tokens, passwords) are stored in the repository settings under 'Secrets'.
+#     They are accessed using ${{ secrets.SECRET_NAME }} and are masked in logs.
+
+# Q6. How can you trigger a workflow on a schedule?
+# A6. By using the 'schedule' event with a cron expression:
+#     Example: schedule: - cron: "0 2 * * *" triggers the workflow daily at 2 AM UTC.
+
+# Q7. Can GitHub Actions deploy to cloud environments?
+# A7. Yes, using prebuilt actions or custom scripts, workflows can deploy to AWS, Azure, GCP,
+#     Kubernetes, Docker, or any environment reachable from the runner.
+
+# Q8. Why use GitHub Actions over Jenkins or other CI/CD tools?
+# A8. - Native to GitHub, no extra server setup
+#     - Easy integration with GitHub repos, pull requests, and secrets
+#     - Supports matrix builds, caching, and custom workflows
+#     - Ideal for cloud-native and containerized projects
+
+# Q9. Interview-friendly summary:
+# A9. “GitHub Actions is a cloud-native CI/CD platform integrated into GitHub. 
+#     It allows automated workflows triggered by events like push or pull request. 
+#     Workflows contain jobs, steps, and actions, running on runners, with secure handling of secrets. 
+#     Key advantages include native GitHub integration, cloud-hosted runners, and ease of pipeline versioning.”
+
+############################################################
+# ADDITIONAL GITHUB ACTIONS Q&A
+############################################################
+
+# Q10. What is a runner in GitHub Actions?
+# A10. A runner is a server or VM that executes the workflow jobs. 
+#      GitHub provides cloud-hosted runners (Linux, Windows, macOS) or you can set up self-hosted runners on your own machines. 
+#      Each job in a workflow runs on a separate runner by default, which allows parallel execution.
+
+# Q11. What are reusable workflows?
+# A11. Reusable workflows allow you to define a workflow in one repository and call it from other workflows or repositories. 
+#      This promotes modularity, reduces duplication, and helps maintain consistent CI/CD standards across projects.
+
+# Q12. How does matrix strategy work in GitHub Actions?
+# A12. The matrix strategy allows you to run the same job multiple times with different configurations (e.g., OS versions, language versions). 
+#      Example: Build a .NET application on Ubuntu, Windows, and macOS simultaneously.
+
+# Q13. How do you debug a failing workflow?
+# A13. - Check the logs in the Actions tab; GitHub shows step-by-step logs.  
+#      - Enable step debugging using `ACTIONS_RUNNER_DEBUG` and `ACTIONS_STEP_DEBUG` secrets set to `true`.  
+#      - Re-run jobs with `Re-run all jobs` or `Re-run failed jobs`.  
+#      - Verify secrets, paths, and dependencies are correctly configured.
+
+# Q14. Can GitHub Actions integrate with external tools?
+# A14. Yes. GitHub Actions can integrate with cloud providers (AWS, Azure, GCP), containers (Docker, Kubernetes), configuration tools (Ansible, Terraform), notifications (Slack, Teams), and almost any API using HTTP requests or prebuilt actions.
+
+# Q15. How are artifacts handled in GitHub Actions?
+# A15. Artifacts are files produced by jobs (e.g., test reports, compiled binaries) that can be uploaded and downloaded using `actions/upload-artifact` and `actions/download-artifact`.  
+#      Artifacts persist only for a limited time (default 90 days) and are scoped per workflow run.
+
+# Q16. How do you handle secrets securely in self-hosted runners?
+# A16. Even on self-hosted runners, GitHub Actions injects secrets as environment variables only during the job execution.  
+#      Secrets are masked in logs and are never written to disk unless explicitly saved by scripts.  
+#      For additional security, limit access to specific repositories and use ephemeral runners.
+
+# Q17. What is the difference between workflow_dispatch and push triggers?
+# A17. - `push` triggers run automatically when code is pushed to a branch.  
+#      - `workflow_dispatch` allows a workflow to be triggered manually from the GitHub UI or via API.  
+#      This is useful for ad-hoc builds, deployments, or testing workflows without pushing code.
+
+# Q18. How do you manage environment-specific deployments?
+# A18. GitHub Actions supports environments with approval gates.  
+#      You can define staging, QA, production environments, restrict deployment permissions, and require manual approval before deploying.  
+#      Example: Use `environment: production` in the deploy job to enable these protections.
+
+# Q19. Interview-friendly summary:
+# A19. “GitHub Actions is a versatile CI/CD platform integrated with GitHub. It supports multiple triggers (push, pull_request, schedule, manual), jobs with matrix strategies, reusable workflows, secure secrets handling, artifact management, and integrations with cloud services. Runners execute jobs, steps define tasks, and actions provide reusable components. Proper use of environments, approvals, and caching ensures professional-grade pipelines.”
