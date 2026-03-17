@@ -3,12 +3,20 @@ name: Professional CI/CD Pipeline
 
 # 2. Triggers for the workflow
 on:
+  workflow_call:
+    inputs:
+     environment:
+       required: true
+       type: string
+  workflow_dispatch:
   push:
     branches:
       - main           # Trigger workflow on push to main branch
   pull_request:
     branches:
       - main           # Trigger workflow for PRs targeting main
+    paths:
+      - src: "*/src"
   schedule:
     - cron: "0 2 * * *" # Nightly run at 2:00 AM UTC
 
