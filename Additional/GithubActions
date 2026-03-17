@@ -20,6 +20,9 @@ on:
   schedule:
     - cron: "0 2 * * *" # Nightly run at 2:00 AM UTC
 
+concurrency:
+ group: mygroup
+ cancel-in-progress: true
 # 3. Environment variables
 env:
   DOTNET_VERSION: '8.0'   # Example for .NET build
