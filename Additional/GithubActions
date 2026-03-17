@@ -16,7 +16,7 @@ on:
     branches:
       - main           # Trigger workflow for PRs targeting main
     paths:
-      - src: "*/src"
+      - "*/src"
   schedule:
     - cron: "0 2 * * *" # Nightly run at 2:00 AM UTC
 
