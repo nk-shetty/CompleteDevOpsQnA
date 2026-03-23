@@ -1,0 +1,12 @@
+1. Please take this opportunity to elaborate on your technical skill set and areas of expertise.
+2. What are the key phases of a migration project, with cutover considered as the final phase?
+3. Can you describe your hands-on experience with GitLab?
+4. What best practices would you recommend for designing and maintaining a build–release pipeline?
+5. What are the key differences between deploying an application component on a VMSS versus a standalone VM?
+6. What is the recommended or most effective approach for deploying an application component to a VMSS?
+7. How do you handle VMSS scale-up after deployment? Have you worked with base image updates and automated deployments using an Automation Account?
+8. What strategies do you follow to promote Docker images across multiple environments?
+9. Which SAST and DAST tools have you integrated into your pipelines?
+10. Scenario: You need to roll out an environment using IaC(Terraform). What prerequisites must be in place before starting?
+11. How do you manage and maintain environment-specific configurations in Terraform?
+12. Additionally, there was a few project-specific questions related to the PDOC–Zenoti engagement, including challenges faced and how they were addressed.
