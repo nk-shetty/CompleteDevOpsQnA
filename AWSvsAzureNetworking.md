@@ -99,31 +99,6 @@ CLOUD & NETWORKING INTERVIEW Q&A
 - ASG / VMSS monitors metrics and adjusts instance count
 - Unhealthy instances automatically replaced
 
-21. **NAT Gateway vs Application Gateway**
-- NAT Gateway: Outbound internet only, Layer 3/4
-- Application Gateway: L7, HTTP/HTTPS routing, WAF
-
-22. **Load Balancer Types**
-- AWS:
-  - ALB → L7, web apps, WAF
-  - NLB → L4, TCP/UDP, static IPs
-- Azure:
-  - Application Gateway → L7, web apps, WAF
-  - Azure Load Balancer → L4, TCP/UDP
-
-23. **Availability Set / VM Scale Set**
-- Azure Availability Set → protects VMs in single data center
-- Azure VMSS → automatic scaling like AWS ASG
-- AWS Multi-AZ ASG → spreads instances across zones for HA
-
-24. **VPC / VNet Peering**
-- Private network connection between isolated networks
-- AWS: VPC Peering
-- Azure: VNet Peering
-
-25. **Routing / Traffic Flow**
-- Client → Internet → Load Balancer → Public Subnet VM → Private Subnet VM → NAT Gateway → Internet (for updates)
-- Route Tables control exact paths
 
 26. **Common Interview Questions & Answers**
 
@@ -166,8 +141,6 @@ Q10: How do Security Groups / NSG work?
 - Control inbound/outbound rules per VM/subnet
 
 
-End of Networking Q&A 
-===============================
 
 
 
