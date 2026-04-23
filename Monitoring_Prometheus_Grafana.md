@@ -1,6 +1,4 @@
-# DevOps Monitoring & Observability Interview Questions – With Answers
-
-This is a **comprehensive continuous list of interview questions** for DevOps engineers (3–7 years experience) covering **Prometheus, Grafana, monitoring, observability**, and **real-time scenarios**. All answers are detailed and include examples.
+# DevOps Monitoring & Observability Questions – With Answers
 
 ---
 
