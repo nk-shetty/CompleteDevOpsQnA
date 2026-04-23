@@ -46,9 +46,7 @@ Types of Agile:
 
 ---
 
-=======================
-2. SCRUM FRAMEWORK – COMPLETE DETAILS
-=======================
+## 2. SCRUM FRAMEWORK – COMPLETE DETAILS
 
 Definition:
 Scrum is a subset of Agile that provides a structured framework for iterative development, emphasizing collaboration, accountability, and iterative progress toward a well-defined goal.
@@ -107,9 +105,8 @@ Benefits:
 
 ---
 
-=======================
-3. JIRA & SERVICENOW Q&A
-=======================
+## 3. JIRA & SERVICENOW Q&A
+
 
 Q1. What is Jira and why is it used?
 A1. Jira is a project management and issue-tracking tool widely used in Agile and DevOps. 
