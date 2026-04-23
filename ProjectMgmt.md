@@ -2,9 +2,7 @@
 # PROJECT MANAGEMENT & AGILE
 ############################################################
 
-=======================
-1. AGILE – COMPLETE EXPLANATION 
-=======================
+## 1. AGILE – COMPLETE EXPLANATION 
 
 Definition:
 Agile is a flexible, iterative approach to software development that emphasizes:
