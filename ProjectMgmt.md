@@ -3,7 +3,7 @@
 ############################################################
 
 =======================
-1. AGILE – COMPLETE EXPLANATION
+1. AGILE – COMPLETE EXPLANATION 
 =======================
 
 Definition:
