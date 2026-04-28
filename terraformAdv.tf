@@ -1,10 +1,3 @@
-/*
-Terraform Interview Questions and Answers
-This file contains expert-level Q&A for Terraform interviews,
-covering installation, backend, drift, variables, import,
-conditional operators, provisioners, multi-region, multi-cloud,
-state locking, workspaces, and real-time scenarios.
-*/
 
 # 1. What is Terraform and why is it used?
 # Terraform is an open-source Infrastructure as Code (IaC) tool developed by HashiCorp.
