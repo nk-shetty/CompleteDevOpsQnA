@@ -54,4 +54,24 @@
 35. Have you worked with AI services?
 
 ---
+# KPMG Interview Question Classification
 
+## Total Questions: 35
+
+---
+
+## ✅ Correct Questions
+2, 7, 10, 11, 12, 16, 21, 22, 23, 27, 1, 3, 8, 26
+
+---
+
+## ⚠️ Partially Correct Questions
+5, 9, 14, 19, 20, 31, 6
+
+---
+
+## ❌ Wrong Questions
+4, 13, 15, 18, 19, 20, 24, 25, 28, 29, 30, 33, 17, 32, 34, 35
+
+---
+## 21/35
